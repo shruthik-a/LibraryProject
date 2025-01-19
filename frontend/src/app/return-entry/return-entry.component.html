@@ -1,0 +1,33 @@
+<div class="container">
+    <h2>Return Entry</h2>
+    <input type="text" class="form-control" placeholder="Search by UserID" [(ngModel)]="searchUserID" />
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Transaction ID</th>
+                <th>Book ID</th>
+                <th>User ID</th>
+                <th>Issued Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let transaction of filteredTransactions()">
+                <td>{{ transaction.ID }}</td>
+                <td>{{ transaction.BookID }}</td>
+                <td>{{ transaction.MemberID }}</td>
+                <td>{{ transaction.IssuedDate | date }}</td>
+                <td>
+                    <button class="btn btn-success" (click)="markAsReturned(transaction.ID, transaction.BookID)"
+                        [disabled]="transaction.Status === 'Returned'">
+                        Mark as Returned
+                    </button> &nbsp;
+                    <button class="btn btn-warning"
+                        (click)="markAsDamaged(transaction.ID, transaction.BookID,transaction.MemberID)">
+                        Mark as Damaged
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

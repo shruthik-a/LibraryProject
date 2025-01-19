@@ -1,0 +1,78 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  justify-content: space-between;
+}
+
+.stat-item {
+  flex: 1;
+  max-width: 13%;
+}
+
+.stat-item {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.stat-item h3 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.stat-item p {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.charts {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-height: 300px;
+}
+
+.charts-placeholder {
+  text-align: center;
+  font-size: 16px;
+  color: #888;
+  line-height: 300px;
+}
+
+.knowMore {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #007bff;
+  color: #ffffff;
+  font-size: 14px;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.knowMore:hover {
+  background-color: #0056b3;
+}

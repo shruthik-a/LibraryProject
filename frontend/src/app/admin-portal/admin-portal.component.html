@@ -1,0 +1,36 @@
+<div class="admin-portal-container">
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <h3>Admin Portal</h3>
+    </div>
+    <ul class="sidebar-nav">
+      <li class="nav-item">
+        <a routerLink="/adminPortal/dashboard" routerLinkActive="active">Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/adminPortal/books" routerLinkActive="active">Books Management</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/adminPortal/users" routerLinkActive="active">Users Management</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/adminPortal/returnEntry" routerLinkActive="active">Return Management</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/adminPortal/categories" routerLinkActive="active">Category</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/adminPortal/dueBooks" routerLinkActive="active">DueBooks</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/adminPortal/fines" routerLinkActive="active">Fine Management</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/adminPortal/activationRequest" routerLinkActive="active">Activation Request</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="main-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

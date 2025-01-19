@@ -1,0 +1,24 @@
+<div class="dashboard-container">
+  <div class="stats">
+    <div class="stat-item" (click)="navigateTo('adminPortal/books')">
+      <h3>Total Books</h3>
+      <p>{{ totalBooks }}</p>
+      <div class="knowMore">Know More</div>
+    </div>
+    <div class="stat-item" (click)="navigateTo('adminPortal/users')">
+      <h3>Total Users</h3>
+      <p>{{ totalUsers }}</p>
+      <div class="knowMore">Know More</div>
+    </div>
+    <div class="stat-item" (click)="navigateTo('adminPortal/dueBooks')">
+      <h3>Books Due for Return</h3>
+      <p>{{ booksDue }}</p>
+      <div class="knowMore">Know More</div>
+    </div>
+    <div class="stat-item" (click)="navigateTo('adminPortal/returnEntry')">
+      <h3>Books Not Returned</h3>
+      <p>{{ notreturned }}</p>
+      <div class="knowMore">Know More</div>
+    </div>
+  </div>
+</div>

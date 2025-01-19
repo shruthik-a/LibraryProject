@@ -1,0 +1,26 @@
+<div class="container mt-4">
+    <h2>Actiivation Requests</h2>
+    <table *ngIf="requests.length > 0" class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>MemberID</th>
+                <th>MemberName</th>
+                <th>RequestedDate</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let request of requests">
+                <td>{{ request.MemberID }}</td>
+                <td>{{ request.MemberName }}</td>
+                <td>{{ request.RequestDate | date }}</td>
+                <td>
+                    <button class="btn btn-primary" (click)="allowAccess(request.RequestID,request.MemberID)">
+                        Allow access
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p *ngIf="requests.length === 0" class="text-center">No Requests!</p>
+</div>

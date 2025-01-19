@@ -1,0 +1,109 @@
+.user-details-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    padding: 10px 20px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.tab-button:hover {
+    background-color: #e0e0e0;
+}
+
+.tab-button.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table th,
+table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+table td {
+    background-color: #fafafa;
+}
+
+button {
+    padding: 6px 12px;
+    font-size: 14px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 12px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.returned-status {
+    background-color: #28a745;
+    color: white;
+    border: 1px solid #218838;
+}
+
+.not-returned-status {
+    background-color: #dc3545;
+    color: white;
+    border: 1px solid #c82333;
+}
+
+.paid-status {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #0056b3;
+}
+
+.unpaid-status {
+    background-color: #ffc107;
+    color: black;
+    border: 1px solid #e0a800;
+}
+
+.status-badge:hover {
+    opacity: 0.8;
+}

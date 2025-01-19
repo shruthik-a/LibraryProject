@@ -1,0 +1,28 @@
+<div class="categories-container">
+  <div class="header">
+    <button class="add-user-btn" (click)="addCategory()">Add New Category</button>
+  </div>
+  <table class="user-table">
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of categories">
+        <td>{{ category.CategoryID }}</td>
+        <td>{{ category.CategoryName}}</td>
+        <td>
+          <button class="edit-btn" (click)="editCategory(category.CategoryID)">
+            <i class="fa fa-pencil-alt"></i> Edit
+          </button>
+          <button class="delete-btn" (click)="deleteCategory(category.CategoryID)">
+            <i class="fa fa-trash-alt"></i> Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

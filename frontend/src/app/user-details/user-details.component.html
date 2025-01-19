@@ -1,0 +1,66 @@
+<div class="user-details-container">
+    <h2>User Details</h2>
+    <div class="tabs">
+        <button class="tab-button" [class.active]="activeTab === 'borrowedBooks'"
+            (click)="setActiveTab('borrowedBooks')">Borrowed Books</button>
+        <button class="tab-button" [class.active]="activeTab === 'fines'" (click)="setActiveTab('fines')">Fines</button>
+    </div>
+    <div *ngIf="activeTab === 'borrowedBooks'">
+        <h3>Borrowed Books</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Book ID</th>
+                    <th>Book Name</th>
+                    <th>Issue Date</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let book of borrowedBooks">
+                    <td>{{ book.BookID }}</td>
+                    <td>{{ book.Title }}</td>
+                    <td>{{ book.IssuedDate | date }}</td>
+                    <td>{{ book.DueDate | date }}</td>
+                    <td>
+                        <span [ngClass]="{
+                  'returned-status': book.ReturnedStatus === 'Returned',
+                  'not-returned-status': book.ReturnedStatus !== 'Returned'
+                }" class="status-badge">
+                            {{ book.ReturnedStatus }}
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p *ngIf="borrowedBooks.length === 0" class="text-center">No Books Borrowed Yet!</p>
+    </div>
+    <div *ngIf="activeTab === 'fines'">
+        <h3>Fines</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Book ID</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let fine of fines">
+                    <td>{{ fine.BookID }}</td>
+                    <td>{{ fine.Amount | currency:'INR' }}</td>
+                    <td>
+                        <span [ngClass]="{
+                  'paid-status': fine.PaymentStatus,
+                  'unpaid-status': !fine.PaymentStatus
+                }" class="status-badge">
+                            {{ fine.PaymentStatus ? 'Paid' : 'Unpaid' }}
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p *ngIf="fines.length === 0" class="text-center">No Fines!</p>
+    </div>
+</div>

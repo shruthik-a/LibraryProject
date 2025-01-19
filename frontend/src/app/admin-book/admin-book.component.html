@@ -1,0 +1,85 @@
+<div class="bookss-container">
+  <div class="header">
+    <button class="add-user-btn" (click)="openAddModal()">Add New Book</button>
+    <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="onSearchQueryChange()" placeholder="Search Books"
+      class="search-input" />
+  </div>
+  <table class="book-table">
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Title</th>
+        <th>AuthorName</th>
+        <th>Category</th>
+        <th>PublishedYear</th>
+        <th>Language</th>
+        <th>TotalCopies</th>
+        <th>CopiesAvailable</th>
+        <th>Status</th>
+        <th>CoverImage</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of filteredBooks">
+        <td>{{ book.BookID }}</td>
+        <td>{{ book.Title }}</td>
+        <td>{{ book.AuthorName }}</td>
+        <td>{{ book.CategoryName }}</td>
+        <td>{{ book.PublishedYear }}</td>
+        <td>{{ book.Language }}</td>
+        <td>{{ book.TotalCopies }}</td>
+        <td>{{ book.CopiesAvailable }}</td>
+        <td>{{ book.Status }}</td>
+        <td>
+          <img [src]="book.image" alt="{{ book.Title }}" width="100" height="100" />
+        </td>
+        <td>
+          <button class="edit-btn" (click)="openEditModal(book)">
+            <i class="fa fa-pencil-alt"></i> Edit
+          </button>
+          <button class="delete-btn" (click)="deleteBook(book.BookID)">
+            <i class="fa fa-trash-alt"></i> Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div [class.show]="showModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Book Form</h2>
+        <button class="close-btn" (click)="closeModal()">X</button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+          <label for="title">Title</label>
+          <input id="title" formControlName="title" type="text">
+
+          <label for="authorName">Author Name</label>
+          <input id="authorName" formControlName="authorName" type="text">
+
+          <label for="categoryName">Category Name</label>
+          <input id="categoryName" formControlName="categoryName" type="text">
+
+          <label for="year">PublishedYear</label>
+          <input id="year" formControlName="year" type="text">
+
+          <label for="language">Language</label>
+          <input id="language" formControlName="language" type="text">
+
+          <label for="totalCopies">TotalCopies</label>
+          <input id="totalCopies" formControlName="totalCopies" type="text">
+
+          <label for="image">Image</label>
+          <input type="text" formControlName="image" id="image">
+
+          <div class="modal-footer">
+            <button type="submit" class="save-btn">Save</button>
+            <button type="button" class="cancel-btn" (click)="closeModal()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

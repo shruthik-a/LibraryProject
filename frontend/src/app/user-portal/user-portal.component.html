@@ -1,0 +1,113 @@
+<div class="portal-container">
+    <div *ngIf="notifications && notifications.length > 0" class="notification-container">
+        <div class="notification-header">Your Notifications</div>
+        <div *ngFor="let notification of notifications" class="notification-item">
+            <span>{{ notification.Message }}</span>
+            <button class="close-btn" (click)="deleteNotification(notification.ID)">
+                &times;
+            </button>
+        </div>
+    </div>
+    <div class="user-profile">
+        <h2>Welcome, {{ user.Name }}!</h2>
+        <p>Email: {{ user.EmailID }}</p>
+        <button (click)="logout()">Logout</button>
+        <div class="action-buttons">
+            <button (click)="toggleBorrowedBooks()">Borrowed Books</button>
+            <button (click)="toggleFineDetails()">Fine Details</button>
+        </div>
+    </div>
+    <div *ngIf="showBorrowedBooks" class="section">
+        <h3>Your Borrowed Books</h3>
+        <div *ngIf="borrowedBooks.length === 0">
+            <p>No Books Borrowed Yet!</p>
+        </div>
+        <table *ngIf="borrowedBooks.length > 0">
+            <thead>
+                <tr>
+                    <th>Book Title</th>
+                    <th>Borrow Date</th>
+                    <th>Due Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let book of borrowedBooks">
+                    <td>{{ book.Title }}</td>
+                    <td>{{ book.IssuedDate | date }}</td>
+                    <td>{{ book.DueDate | date }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="showFineDetails" class="section">
+        <h3>Your Fine Details</h3>
+        <div *ngIf="fines.length === 0">
+            <p>No fines</p>
+        </div>
+        <table *ngIf="fines.length > 0">
+            <thead>
+                <tr>
+                    <th>Book Title</th>
+                    <th>Fine Amount</th>
+                    <th>Paid Status</th>
+                    <th>Due Date</th>
+                    <th>FinePayment</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let fine of fines">
+                    <td>{{ fine.bookTitle }}</td>
+                    <td>{{ fine.fineAmount | currency:'INR' }}</td>
+                    <td>{{ fine.paidStatus ? 'Paid' : 'Unpaid' }}</td>
+                    <td>{{ fine.dueDate | date }}</td>
+                    <td>
+                        <button *ngIf="!fine.paidStatus" (click)="payFine(fine)" class="btn btn-primary">
+                            Pay
+                        </button>
+                        <span *ngIf="fine.paidStatus" class="text-success">Paid</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="search-bar">
+        <input type="text" [(ngModel)]="searchQuery" (input)="filterBooks()" placeholder="Search for a book" />
+    </div>
+    <div *ngIf="filteredBooks.length > 0" class="search-results">
+        <div class="book-cards">
+            <div *ngFor="let book of filteredBooks" class="book-card">
+                <img [src]="book.image" alt="{{ book.title }} Cover" class="book-cover" />
+                <h4>{{ book.Title }}</h4>
+                <p>Year: {{ book.PublishedYear }}</p>
+                <p>Status: {{ book.Status }}</p>
+                <button (click)="borrowBook(book)" [disabled]="book.Status === 'Borrowed'">Borrow</button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="filteredBooks.length === 0 && searchQuery.trim()" class="no-results">
+        <p>No books found for "{{ searchQuery }}".</p>
+    </div>
+    <div class="modal" *ngIf="isModalVisible" id="borrowedBooksModal" class="custom-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">You can borrow only {{ maxBookCount }} books,</h3>
+                    <button type="button" class="close" (click)="closeModal()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li *ngFor="let book of borrowedBooks">
+                            {{ book.Title }}
+                            <button (click)="removeBook(book)">Remove</button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,80 @@
+<div class="loginPage">
+    <div class="form-container">
+        <div class="tabs">
+            <button [class.active]="currentTab === 'login'" (click)="setTab('login')">Login</button>
+            <button [class.active]="currentTab === 'register'" (click)="setTab('register')">Register</button>
+        </div>
+        <div class="tab-content" *ngIf="currentTab === 'login'">
+            <form (submit)="onLoginSubmit()">
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" [(ngModel)]="loginData.email" name="email" placeholder="Enter email"
+                        required />
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" [(ngModel)]="loginData.password" placeholder="Enter password"
+                        name="password" required />
+                </div>
+                <div *ngIf="loginErrorMessage" class="error-message">
+                    <p>{{ loginErrorMessage }}</p>
+                </div>
+                <div *ngIf="datas?.Status === 'InActive' && datas?.ReinstatementCount < 3">
+                    <button type="button" (click)="requestActivation()">Request Activation</button>
+                </div>
+                <br>
+                <div *ngIf="datas?.ReinstatementCount >= 2">
+                    <button type="button" (click)="payForExceedingLimit()">Pay 80</button>
+                </div>
+                <br>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+        <div class="tab-content" *ngIf="currentTab === 'register'">
+            <div *ngIf="registerSuccessMsg" class="alert success-alert">
+                <strong>{{ registerSuccessMsg }}</strong>
+            </div>
+            <form (submit)="onRegisterSubmit()" [ngClass]="{'form-submitted': isPaid}">
+                <div class="input-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" [(ngModel)]="registerData.name" name="name" placeholder="Enter name"
+                        required />
+                </div>
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" [(ngModel)]="registerData.email" name="email"
+                        placeholder="Enter email" required />
+                </div>
+                <div class="input-group">
+                    <label for="phoneNumber">Phone Number</label>
+                    <input type="tel" id="phoneNumber" [(ngModel)]="registerData.phoneNumber"
+                        placeholder="Enter phoneno" name="phoneNumber" required />
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Set password" [(ngModel)]="registerData.password"
+                        name="password" required />
+                </div>
+                <div class="input-group">
+                    <label for="plan">Choose Plan</label>
+                    <select id="plan" [(ngModel)]="registerData.plan" name="plan" required (change)="calculateAmount()">
+                        <option value="">Select your plan</option>
+                        <option value="basic">Basic</option>
+                        <option value="premium">Premium</option>
+                    </select>
+                </div>
+                <div *ngIf="registerData.plan">
+                    <button type="button" (click)="markAsPaid()" [disabled]="isPaid">
+                        {{ isPaid ? 'Paid' : ('Pay: ' + (amountToPay | currency:'INR':'symbol')) }}
+                    </button>
+                </div>
+                <br>
+                <div class="error-message" *ngIf="registerErrorMessage">
+                    <p>{{ registerErrorMessage }}</p>
+                </div>
+                <button type="submit"
+                    [disabled]="!isPaid || !registerData.name || !registerData.email || !registerData.phoneNumber || !registerData.password || !registerData.plan">Register</button>
+            </form>
+        </div>
+    </div>
+</div>

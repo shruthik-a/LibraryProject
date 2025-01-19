@@ -1,0 +1,30 @@
+<div class="container mt-4">
+  <h2>Fine Management</h2>
+  <table *ngIf="fines.length > 0" class="table table-bordered table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>MemberID</th>
+        <th>MemberName</th>
+        <th>Book Name</th>
+        <th>Due Date</th>
+        <th>Status</th>
+        <th>Alert</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let fine of fines">
+        <td>{{ fine.MemberID }}</td>
+        <td>{{ fine.Name }}</td>
+        <td>{{ fine.BookName }}</td>
+        <td>{{ fine.DueDate | date }}</td>
+        <td>{{ fine.ReturnedStatus ? 'Paid' : 'Unpaid' }}</td>
+        <td>
+          <button class="btn btn-primary" (click)="notifyUser(fine)">
+            Notify User
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="fines.length === 0" class="text-center">No Fines!</p>
+</div>

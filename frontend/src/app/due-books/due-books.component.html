@@ -1,0 +1,30 @@
+<div class="container mt-4">
+  <h2>Books Due for Return</h2>
+  <table *ngIf="booksDueForReturn.length > 0" class="table table-bordered table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>MemberID</th>
+        <th>MemberName</th>
+        <th>Book Name</th>
+        <th>Due Date</th>
+        <th>Status</th>
+        <th>Alert</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of booksDueForReturn">
+        <td>{{ book.MemberID }}</td>
+        <td>{{ book.MemberName }}</td>
+        <td>{{ book.BookName }}</td>
+        <td>{{ book.DueDate | date }}</td>
+        <td>{{ book.ReturnedStatus }}</td>
+        <td>
+          <button class="btn btn-primary" (click)="notifyUser(book)">
+            Notify User
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="booksDueForReturn.length === 0" class="text-center">No books are due for return.</p>
+</div>
